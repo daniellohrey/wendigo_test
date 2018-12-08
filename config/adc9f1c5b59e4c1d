@@ -1,1 +1,12 @@
-998e1a56fb758f4f
+[
+  {
+    "fn_seed_module":"mod1",
+    "id_seed_sleep":"10",
+    "arg1":"thank",
+    "arg2":"wank",
+    "arg3":"lol"
+  },
+  {
+    "fn_seed_module":"mod2"
+  }
+]
