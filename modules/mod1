@@ -1,0 +1,8 @@
+def run(args, config):
+	for key in args:
+		print key
+		print args[key]
+
+	print str(config.g_pwd())
+	config.u_pwd("wank")
+	return
