@@ -1,9 +1,0 @@
-def run(config, **args):
-	for key in args:
-		print key
-		print args[key]
-
-	print str(config.g_pwd())
-	config.u_pwd("yeet")
-	print str(config.g_pwd())
-	return config, None

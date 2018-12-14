@@ -1,3 +1,0 @@
-def run(config, **args):
-	print str(config.g_pwd())
-	return config, None

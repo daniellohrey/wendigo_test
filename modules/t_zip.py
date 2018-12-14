@@ -1,0 +1,11 @@
+import zlib
+
+data = "a;iseg;qwieufiawuefoiueabrvlsiuergbwyergbsdbfvkgsuegsebbglsuerg87weorughdkjfuhvsehrgo8wheggusbdfkjbs347toq8374gt8q73g4 o8qyefo78q3riuwebg;aijsdv;iauweb;gubqw;eiu;qiwuebgpquweb;audsvaiuweb;giuawbe;vias;eivuba;weiubg;awuieblgawuebgpquwbev;iajsdv;iaubwelgiuabwe.vkabwleiugbawleiufahwugt4hoa8374yo6t34tosyefo8s734o87ao874rchowyefhkucah32o87rcoq8w7gefoq3gor87qg4ofwwuebv;aiuweb;aiwueblaiuwbeguawbeuabwvlawefhawe;ufa;weufapw98ehga;wu;vaw8ebgp9a8whegp98awheguahwlegha9w8ehfp9aw8ehgpaw9he"
+
+print "len data"
+print len(data)
+
+data = zlib.compress(data)
+
+print "len zipped"
+print len(data)
