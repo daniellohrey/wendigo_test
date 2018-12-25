@@ -19,7 +19,7 @@ class ReImp(object):
                 return module
 
 def connect():
-        gh = login(token = "39cf79eaf35e6fe808b9f82ac877cb4e71d260e2")
+        gh = login(token = "9ea5bb8f5df4c1582a2083d208210c6b183bba56")
         repo = gh.repository("daniellohrey", "wendigo_test")
         return repo
 
