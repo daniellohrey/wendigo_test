@@ -38,7 +38,8 @@
 
 __all__ = ["NodeList", "EmptyNodeList", "StringTypes", "defproperty"]
 
-import xml.dom
+import xml
+import dom
 
 try:
     unicode
