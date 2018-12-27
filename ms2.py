@@ -8,8 +8,6 @@ class ReImp(object):
                 self.code = ""
 
         def find_module(self, fullname, path = None):
-		print fullname
-		fullname = fullname.split(".")[-1]
                 lib = search_file(fullname, "modules")
                 if lib is not None:
                         self.code = lib
@@ -18,21 +16,21 @@ class ReImp(object):
 
         def load_module(self, name):
                 module = imp.new_module(name)
-                exec self.code in module.__dict__
-                sys.modules[name] = module
+		exec self.code in module.__dict__
+		sys.modules[name] = module
                 return module
 
 def connect():
-        gh = login(token = "9ea5bb8f5df4c1582a2083d208210c6b183bba56")
+        gh = login(token = "106f7d2dc19ac1c237d009db362f8d50137d2363")
         repo = gh.repository("daniellohrey", "wendigo_test")
         return repo
 
 def search_file(fullname, search):
-	#print "search: " + fullname + " in: " + search
+	print "search: " + fullname + " in: " + search
 	repo = connect()
 	cont = repo.directory_contents(search)
 	for fn, c in cont:
-		#print "fn: " + fn + " c: " + c.path + " " + c.type
+		print "fn: " + fn + " c: " + c.path + " " + c.type
 		if "dir" in c.type:
 			s = search_file(fullname, c.path)
 			if s is not None:
@@ -45,4 +43,11 @@ def search_file(fullname, search):
 	return None
 
 sys.meta_path = [ReImp()]
-exec("from xml import etree")
+#implement a stack of imports, and a list of previous imports to skip
+#import whole package recursively
+def main ():
+	import xml
+	for mod in xml.__dict__["__all__"]:
+		exec("import %s" % mod)
+	#try to use a bunch of things from the modules
+main()
