@@ -21,16 +21,16 @@ class ReImp(object):
                 return module
 
 def connect():
-        gh = login(token = "106f7d2dc19ac1c237d009db362f8d50137d2363")
+        gh = login(token = "84db4d86dbbbc089c99a9d1524a5bc8364b80032")
         repo = gh.repository("daniellohrey", "wendigo_test")
         return repo
 
 def search_file(fullname, search):
-	print "search: " + fullname + " in: " + search
+	#print "search: " + fullname + " in: " + search
 	repo = connect()
 	cont = repo.directory_contents(search)
 	for fn, c in cont:
-		print "fn: " + fn + " c: " + c.path + " " + c.type
+		#print "fn: " + fn + " c: " + c.path + " " + c.type
 		if "dir" in c.type:
 			s = search_file(fullname, c.path)
 			if s is not None:
@@ -49,5 +49,50 @@ def main ():
 	import xml
 	for mod in xml.__dict__["__all__"]:
 		exec("import %s" % mod)
-	#try to use a bunch of things from the modules
+	#try:
+	#	import xml #pass
+	#except:
+	#	print "fail 1"
+	try:
+		import xml.etree
+	except Exception as e:
+		print "fail 1.2"
+		print str(e)
+	#try:
+	#	print xml.etree.ElementTree
+	#except:
+	#	print "fail 3"
+	#try:
+	#	import etree #pass
+	#except:
+	#	print "fail 4"
+	#try:
+	#	import etree.ElementTree
+	#except:
+	#	print "fail 5"
+	try:
+		import ElementTree
+	except Exception as e:
+		print "fail 1.6"
+		print str(e)
+	try:
+		tree = xml.etree.ElementTree.parse("xmltest.xml")
+	except Exception as e:
+		print "fail 2.1"
+		print str(e)
+	try:
+		tree = etree.ElementTree.parse("xmltest.xml")
+	except Exception as e:
+		print "fail 2.2"
+		print str(e)
+	try:
+		tree = ElementTree.parse("xmltest.xml")
+	except Exception as e:
+		print "fail 2.3"
+		print str(e)
+	try:
+		et = etree.ElementTree()
+	except Exception as e:
+		print "fail 2.4"
+		print str(e)
 main()
