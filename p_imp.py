@@ -1,9 +1,11 @@
 import sys
 import imp
+import StringIO
 from github3 import login
 
 def search_file(fullname, search):
-	repo = connect()
+	gh = login(token = "f58c564505301a23df98092f96c9696075a0aba9")
+	repo = gh.repository("daniellohrey", "wendigo_test")
 	cont = repo.directory_contents(search)
 	for fn, c in cont:
 		if "dir" in c.type:
@@ -29,16 +31,21 @@ def my_load(fullname):
 			modname = mod
 		contents = search_file(mod, pathname)
 		if contents:
-			with open("temp.py", "w") as f:
-				f.write(contents)
+			s_io = StringIO.StringIO(contents)
 		else:
 			return None
 		suffixes = (".py", "r", imp.PY_SOURCE)
 		pathname = pathname + "/" + mod
-		file = open("temp.py", "r")
 		try:
-			sys.modules[modname] = imp.load_module(modname, file, 
-								pathname, suffixes)
+			n_mod = imp.new_module(modname)
+			exec contents in n_mod.__dict__
+			sys.modules[modname] = n_mod
 		finally:
-			file.close()
+			s_io.close()
 	return sys.modules[fullname]
+
+try:
+	yay = my_load("xml.etree.ElementTree")
+	print str(yay)
+except Exception as e:
+	print str(e)
